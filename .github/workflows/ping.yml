@@ -11,5 +11,19 @@ jobs:
     steps:
       - name: Ping Video Translator
         run: curl -I https://video-player-1.streamlit.app/
+        
+      - name: Ping Another App
+        run: curl https://multimodel-ai-agent.streamlit.app/
+
+      - name: Ping Third App
+        run: https://cropai-recommendation-system.streamlit.app/
+
+      - name: Ping Another App
+        run: curl -I https://dynamic-ai-agent-with-web-search.streamlit.app/
+
+      - name: Ping Third App
+        run: curl -I https://video-player.streamlit.app/
+
+
 
       
