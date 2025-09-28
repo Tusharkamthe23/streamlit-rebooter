@@ -1,0 +1,55 @@
+name: Redeploy Streamlit Apps in Parallel
+
+on:
+  workflow_dispatch:  # manual trigger
+  schedule:
+    - cron: "0 3 * * *"   # daily at 3 AM UTC
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app_repo: [
+          git@github.comtusharkamthe23video-player.git,
+          git@github.comtusharkamthe23dynamic-ai-agent-with-web-search-frontend.git,
+          git@github.comTusharkamthe23Crop-recommendation-system.git,
+          git@github.comTusharkamthe23Video-Ai-Agent.git,
+          git@github.comTusharkamthe23Video-translator.git,
+          git@github.comTusharkamthe23tusharkamthe23chatbot.git
+        ]
+
+    steps:
+      - name: Checkout self
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install GitPython
+        run: pip install GitPython
+
+      - name: Redeploy Streamlit App
+        run: |
+          python - << 'EOF'
+          import os
+          from git import Repo
+
+          repo_url = os.environ["REPO_URL"]
+          repo_name = repo_url.split("/")[-1].replace(".git", "")
+
+          if not os.path.exists(repo_name):
+              print(f"Cloning {repo_name}...")
+              Repo.clone_from(repo_url, repo_name)
+
+          repo = Repo(repo_name)
+          repo.git.add(A=True)
+          repo.index.commit(f"Trigger Streamlit rebuild via automation")
+          origin = repo.remote(name='origin')
+          origin.push()
+          print(f"Redeploy triggered for {repo_name}")
+          EOF
+        env:
+          REPO_URL: ${{ matrix.app_repo }}
