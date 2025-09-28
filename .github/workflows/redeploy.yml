@@ -18,7 +18,7 @@ jobs:
           #"":Tusharkamthe23/Crop-recommendation-system"
           "Tusharkamthe23/Video-Ai-Agent",
           "Tusharkamthe23/Video-translator",
-          "Tusharkamthe23/tusharkamthe23chatbot"
+          "Tusharkamthe23/chatbot"
         ]
 
     steps:
