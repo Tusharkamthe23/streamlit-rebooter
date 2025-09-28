@@ -11,12 +11,12 @@ jobs:
     strategy:
       matrix:
         app_repo: [
-          git@github.comtusharkamthe23video-player.git,
-          git@github.comtusharkamthe23dynamic-ai-agent-with-web-search-frontend.git,
-          git@github.comTusharkamthe23Crop-recommendation-system.git,
-          git@github.comTusharkamthe23Video-Ai-Agent.git,
-          git@github.comTusharkamthe23Video-translator.git,
-          git@github.comTusharkamthe23tusharkamthe23chatbot.git
+          git@github.com:tusharkamthe23video-player.git,
+          git@github.com:tusharkamthe23dynamic-ai-agent-with-web-search-frontend.git,
+          git@github.com:Tusharkamthe23Crop-recommendation-system.git,
+          git@github.com:Tusharkamthe23Video-Ai-Agent.git,
+          git@github.com:Tusharkamthe23Video-translator.git,
+          git@github.com:Tusharkamthe23tusharkamthe23chatbot.git
         ]
 
     steps:
