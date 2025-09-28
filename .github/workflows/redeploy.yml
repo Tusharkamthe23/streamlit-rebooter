@@ -13,12 +13,12 @@ jobs:
         app_repo: [
           
           
-          "tusharkamthe23video-player",
-          "tusharkamthe23dynamic-ai-agent-with-web-search-frontend",
-          #"":Tusharkamthe23Crop-recommendation-system"
-          "Tusharkamthe23Video-Ai-Agent",
-          "Tusharkamthe23Video-translator",
-          "Tusharkamthe23tusharkamthe23chatbot"
+          "tusharkamthe23/video-player",
+          "tusharkamthe23/dynamic-ai-agent-with-web-search-frontend",
+          #"":Tusharkamthe23/Crop-recommendation-system"
+          "Tusharkamthe23/Video-Ai-Agent",
+          "Tusharkamthe23/Video-translator",
+          "Tusharkamthe23/tusharkamthe23chatbot"
         ]
 
     steps:
