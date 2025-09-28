@@ -1,9 +1,9 @@
-name: Redeploy Streamlit Apps in Parallel
+name: Redeploy Multiple Streamlit Apps
 
 on:
-  workflow_dispatch:  # manual trigger
+  workflow_dispatch:   # Manual trigger from GitHub UI
   schedule:
-    - cron: "0 3 * * *"   # daily at 3 AM UTC
+    - cron: "0 3 * * *"   # Every day at 3AM UTC
 
 jobs:
   redeploy:
@@ -11,45 +11,32 @@ jobs:
     strategy:
       matrix:
         app_repo: [
-          git@github.com:tusharkamthe23video-player.git,
-          git@github.com:tusharkamthe23dynamic-ai-agent-with-web-search-frontend.git,
-          #git@github.com:Tusharkamthe23Crop-recommendation-system.git,
-          git@github.com:Tusharkamthe23Video-Ai-Agent.git,
-          git@github.com:Tusharkamthe23Video-translator.git,
-          git@github.com:Tusharkamthe23tusharkamthe23chatbot.git
+          
+          
+          "tusharkamthe23video-player",
+          "tusharkamthe23dynamic-ai-agent-with-web-search-frontend",
+          #"":Tusharkamthe23Crop-recommendation-system"
+          "Tusharkamthe23Video-Ai-Agent",
+          "Tusharkamthe23Video-translator",
+          "Tusharkamthe23tusharkamthe23chatbot"
         ]
 
     steps:
-      - name: Checkout self
+      - name: Checkout central repo
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.11
-
-      - name: Install GitPython
-        run: pip install GitPython
-
-      - name: Redeploy Streamlit App
+      - name: Configure Git
         run: |
-          python - << 'EOF'
-          import os
-          from git import Repo
+          git config --global user.email "actions@github.com"
+          git config --global user.name "github-actions"
 
-          repo_url = os.environ["REPO_URL"]
-          repo_name = repo_url.split("/")[-1].replace(".git", "")
+      - name: Trigger Redeploy for ${{ matrix.app_repo }}
+        run: |
+          repo_url="https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/${{ matrix.app_repo }}.git"
 
-          if not os.path.exists(repo_name):
-              print(f"Cloning {repo_name}...")
-              Repo.clone_from(repo_url, repo_name)
+          echo "Cloning $repo_url"
+          git clone "$repo_url" app
+          cd app
 
-          repo = Repo(repo_name)
-          repo.git.add(A=True)
-          repo.index.commit(f"Trigger Streamlit rebuild via automation")
-          origin = repo.remote(name='origin')
-          origin.push()
-          print(f"Redeploy triggered for {repo_name}")
-          EOF
-        env:
-          REPO_URL: ${{ matrix.app_repo }}
+          git commit --allow-empty -m "Trigger Streamlit rebuild $(date)"
+          git push "$repo_url" HEAD:main
