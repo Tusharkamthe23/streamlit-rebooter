@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Video Translator
-        run: curl -L https://video-player-1.streamlit.app/
-
-      - name: Ping Another App
-        run: curl -L https://multimodel-ai-agent.streamlit.app/
+        run: curl -I https://video-player-1.streamlit.app/
 
       
