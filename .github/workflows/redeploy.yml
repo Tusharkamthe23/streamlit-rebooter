@@ -13,7 +13,7 @@ jobs:
         app_repo: [
           git@github.com:tusharkamthe23video-player.git,
           git@github.com:tusharkamthe23dynamic-ai-agent-with-web-search-frontend.git,
-          git@github.com:Tusharkamthe23Crop-recommendation-system.git,
+          #git@github.com:Tusharkamthe23Crop-recommendation-system.git,
           git@github.com:Tusharkamthe23Video-Ai-Agent.git,
           git@github.com:Tusharkamthe23Video-translator.git,
           git@github.com:Tusharkamthe23tusharkamthe23chatbot.git
